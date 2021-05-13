@@ -1,13 +1,13 @@
-function exponent(b, n){
-    return n === 0
+function factorial(n){
+    return n === 0 || n === 1
     ? 1
-    : exponent_iter(b, n, b);
+    : factorial_iter(n, n, n-1);
 }
 
-function exponent_iter(b, counter, product){
-    return counter === 1
+function factorial_iter(n, product, count){
+    return count === 1
     ? product
-    : exponent_iter(b, counter-1 ,product*b);
+    : factorial_iter(n, product*count, count-1);
 }
 
-exponent(2,0);
+factorial(1);
