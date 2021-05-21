@@ -1,0 +1,59 @@
+function color_squence(n, rune){
+        //red, pink, purple, indigo, blue, green, yellow, orange, brown
+    if(n ===1){
+        return red(rune);
+    }
+    else if(n ===2){
+        return pink(rune);
+    }
+    else if(n ===3){
+        return indigo(rune);
+    }
+    else if(n ===4){
+        return blue(rune);
+    }
+    else if(n ===5){
+        return green(rune);
+    }
+    else if(n ===6){
+        return yellow(rune);
+    }
+    else if(n ===7){
+        return orange(rune);
+    }
+    else{
+        return brown(rune);
+    }
+}
+
+function color_square(n, rune){
+    
+    return color_square_1(1, n, rune);
+    
+}
+
+function color_square_1(counter, n, rune){
+    return counter === n
+    ? stackn(math_pow(2, n-1), color_squence(counter, rune))
+    : beside(stackn(math_pow(2, counter-1), color_squence(counter, rune)),
+                color_square_1(counter+1, n, color_squence(counter, rune)));
+}
+
+show(color_square(8,make_cross(circle)));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
