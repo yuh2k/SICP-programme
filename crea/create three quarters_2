@@ -1,0 +1,24 @@
+//2
+function three_quarters(p) {
+    
+    // your answer here
+    return t =>{
+        
+        const p = unit_circle(t);
+        if(t <= 3/4){
+            return make_point(x_of(p), y_of(p));
+        }
+        else{
+            return make_point(0,-1);
+        }
+};
+}
+
+function unit_circle(t) {
+    return make_point(math_cos(2 * math_PI * t),
+            math_sin(2 * math_PI * t));
+}
+
+draw_connected_full_view_proportional(200)(three_quarters(make_point(0.5, 0.25)));
+
+
