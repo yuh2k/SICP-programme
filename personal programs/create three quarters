@@ -1,0 +1,9 @@
+function three_quarters(pt) {
+    // your answer here
+    return t => {
+            return make_point(math_cos(2 * 3/4 * t  * math_PI) + x_of(pt)
+                            , math_sin(2 * 3/4 * t  * math_PI) + y_of(pt));
+    };
+}
+// Test
+draw_connected_full_view_proportional(200)(three_quarters(make_point(0.5, 0.25)));
