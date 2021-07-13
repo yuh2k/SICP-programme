@@ -1,0 +1,12 @@
+function sum_helper(xs, total){
+    return is_null(xs)
+        ? total
+        : sum_helper(tail(xs), total + head(xs));
+}
+
+function sum_iter(list){
+    return sum_helper(list, 0);
+}
+
+const my_list = list(1,2,3,4);
+sum_iter(my_list);
