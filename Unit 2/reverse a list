@@ -1,0 +1,14 @@
+function reverse(lst) {
+    function reverse_iter(lst, result) {
+        return is_null(lst)
+              ? result
+              : reverse_iter(tail(lst),
+                      pair(head(lst), result));
+    }
+    return reverse_iter(lst, null);
+}
+
+reverse(list(1, 4, 5, 9, 16, 25));
+
+
+
