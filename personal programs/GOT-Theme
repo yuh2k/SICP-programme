@@ -1,0 +1,121 @@
+import { get_wave, get_duration, play, silence_sound, trombone, piano, adsr,stop,
+            sine_sound,violin,bell,cello,noise_sound,
+         record_for, init_record, consecutively, simultaneously } from "sound";
+//=====================================================================================
+//                             !!! PLEASE NOTE THIS !!!
+// Please wait patiently till the music can be played, it will take at most 30 seconds
+// to process the sound due to the big size of my music.
+// The browser may suggest that this WEBPAGE HAS NO RESPONSE, but it does not mean
+// this music cannot be played.
+// Thank you! : ) Enjoy this
+//
+// What’s more, there is a Reverberation version at the end of code. You can cancel the
+// "//" and use the new "return" then enjoy this, if you like.(Take more time to process)
+//======================================================================================
+
+
+
+// My contest entry
+function sounds_contest_YU_HANG() {
+    const drum_envelope = adsr(0.05, 0.95, 0, 0);
+    const drum = drum_envelope(simultaneously(list(sine_sound(79,0.22),sine_sound(89,0.22))));
+    function string(midi, dur){
+        return simultaneously(list(cello(midi-12, dur), trombone(midi - 12, dur),trombone(midi, dur) ,cello(midi - 12, dur),violin( midi + 12, dur), cello( midi-24, dur) ) );
+}
+    function pipe_organ(midi, dur){
+        return simultaneously(list(cello(midi-12, dur), trombone(midi , dur),trombone(midi - 24, dur), violin( midi, dur), piano( midi-24, dur), cello( midi - 24, dur)));
+}   
+    function pipe_organ_low(midi, dur){
+        return simultaneously(list(cello(midi-24, dur), violin( midi - 12, dur)));
+}
+    function orchestra(midi, dur){
+        return simultaneously(list(cello(midi-12, dur),violin(midi - 24, dur), trombone(midi , dur),violin( midi - 12, dur), violin( midi + 12, dur), cello( midi - 24, dur), cello( midi + 12, dur)));
+}   
+    function orchestra_low(midi, dur){
+        return simultaneously(list(piano(midi-12, dur),violin(midi - 24, dur), trombone(midi , dur),violin( midi - 12, dur),  cello( midi - 12, dur)));
+}   
+    function string_low(midi, dur){
+        // return simultaneously(list(trombone(midi - 12, dur),trombone(midi, dur),  cello(midi - 12, dur), violin( midi - 12 , dur)));
+        return simultaneously(list(piano(midi-12, dur), trombone(midi - 24, dur), trombone(midi , dur), violin( midi - 12, dur),  cello( midi - 12, dur)));
+}
+
+    
+    const chord1 = consecutively(list(simultaneously(list(orchestra(64, 0.38),bell(160, 0.15))) , orchestra(57, 0.38), orchestra(60, 0.2), orchestra(62, 0.2)));
+    const chord1_organ_low = adsr(0.9, 0.5,0.5,0)(consecutively(list(pipe_organ_low(64, 6.4))));
+
+
+    const chord2 = consecutively(list(simultaneously(list(orchestra(64, 0.38),bell(160, 0.15))), orchestra(57, 0.38), orchestra(61, 0.2), orchestra(62, 0.2)));
+
+    const melody1_string = consecutively(list(string(64,1), string(57,1), string(60,0.2),string(62,0.2),string(64,0.6),string(57, 0.8),string(60,0.2),string(62,0.2),string(59,4)));
+    const melody1_orchestra = consecutively(list(orchestra(64,1), orchestra(57,1), orchestra(60,0.2),orchestra(62,0.2),orchestra(64,0.6),orchestra(57, 0.8),orchestra(60,0.2),orchestra(62,0.2),orchestra(59,4)));
+    const melody1 = simultaneously(list(melody1_string, sine_sound(41.2,2), drum));
+    const chord_Em = (simultaneously(list(cello(40,0.38), trombone(52,0.38),cello(59,0.38),trombone(64,0.38),trombone(71,0.38))));
+    const chord3_trombone = consecutively(list(chord_Em, trombone(52,0.38),trombone(55,0.2),trombone(57,0.2)));
+    const chord3_piano = consecutively(list(chord_Em, piano(52,0.38),piano(55,0.2),piano(57,0.2)));
+    const chord3 = simultaneously(list(bell(167,0.15), chord3_piano, chord3_trombone, sine_sound(61.7, 1.1), trombone(4,1.15)));
+    const melody2_orchestra_low = consecutively(list( simultaneously(list(orchestra_low(62,0.9), bell(158,0.5))) ,orchestra_low(55, 0.9),orchestra_low(60,0.22),orchestra_low(59,0.2),orchestra_low(62,0.7),orchestra_low(55,0.7),orchestra_low(60,0.22),orchestra_low(59,0.2),orchestra_low(57,4.8)));
+    const melody2_orchestra = consecutively(list( simultaneously(list(orchestra(62,0.9), bell(158,0.5))) ,orchestra(55, 0.9),orchestra(60,0.22),orchestra(59,0.2),orchestra(62,0.7),orchestra(55,0.7),orchestra(60,0.22),orchestra(59,0.2),orchestra(57,4.8)));
+    const melody2 = melody2_orchestra_low;
+    const chord4_trombone = consecutively(list(trombone(57,0.35), trombone(52, 0.35), trombone(53, 0.2), trombone(55, 0.2)));
+    const chord4_violin = consecutively(list(violin(33,0.35), violin(28, 0.35), violin(29, 0.2), violin(31, 0.2)));
+    const chord4 = simultaneously(list(chord4_violin, chord4_trombone, piano(153, 0.2), sine_sound(49, 0.8), adsr(0,0.9,0,0)(pipe_organ(81, 0.8))));
+    const chord5_string = consecutively(list(string_low(69, 0.35), string_low(60, 0.35), simultaneously(list(string_low(65,0.2),drum)), string_low(67, 0.2), string_low(69, 0.35), string_low(60, 0.35)));
+    const chord6_string = consecutively(list(string_low(67, 0.2), string_low(69, 0.2), simultaneously(list(string_low(67,0.35),drum)), string_low(60, 0.35), string_low(64, 0.2), string_low(65, 0.2)));
+    const chord7_string = consecutively(list(string_low(67, 0.35), string_low(60, 0.35), simultaneously(list(string_low(64,0.2),drum)), string_low(67, 0.2), string_low(65, 0.35), string_low(57, 0.35)));
+    const chord8_string = consecutively(list(string_low(62, 0.2), string_low(64, 0.2), simultaneously(list(string_low(65,0.35),drum)), string_low(57, 0.35), string_low(60, 0.2), string_low(62, 0.2)));
+    const chord9_string_1 = consecutively(list(string_low(60, 0.35), string_low(53, 0.35), simultaneously(list(string_low(60,0.7),drum)), string_low(62, 0.7), string_low(64, 1.4) ));
+    const chord9_string = consecutively(list(string_low(60, 0.35), string_low(53, 0.35), simultaneously(list(string_low(60,0.2),drum)), string_low(59, 0.2), string_low(62, 0.35), string_low(59, 0.76), string_low(60, 0.2), string_low(59, 0.2), string_low(57, 1.5)));
+    const string_melody = consecutively(list(  adsr(0,0.9,0,0)(violin(79,2.4)), adsr(0,0.9,0,0)(violin(69,2.4)), adsr(0,0.9,0,0)(violin(76,2.4))));
+    const chord6789_1 = simultaneously(list( string_melody,  consecutively(list( chord6_string  , chord7_string, chord8_string, chord9_string_1))));  
+    const chord6789 = simultaneously(list( string_melody,  consecutively(list( chord6_string  , chord7_string, chord8_string, chord9_string))));  
+// 5 1 3 4 5 1
+    const end = consecutively(list(piano(81,0.35),piano(76,0.35), piano(77,0.2),piano(79,0.2),piano(81,0.35),piano(76,0.35), piano(77,0.2),piano(79,0.2),piano(81,0.35),piano(76,0.35), piano(77,0.2),piano(79,0.2),silence_sound(0.05),adsr(0.2,0.2,0,0)(piano(79,0.2)),silence_sound(0.05),adsr(0.25,0.25,0.1,0)(piano(79,0.2)) ));
+
+
+
+    function repeat(n, music){
+        return n === 0
+               ? silence_sound(0)
+               : consecutively(list(music, repeat(n - 1, music)));
+    }
+    
+
+    
+
+    return consecutively(list(  
+                                      simultaneously(list(consecutively(list(adsr(0.95, 0.9, 0, 0)(repeat(3, chord1)), repeat(3, chord2))), chord1_organ_low)),
+                                      
+                                      simultaneously(list(melody1,drum_envelope((sine_sound(79, 1))),   consecutively(list( silence_sound(4.2),repeat(4, chord3)  )))),
+                        
+                                      simultaneously(list(melody2, piano(50,1),   consecutively(list( silence_sound(4.05),repeat(4, chord4))))),
+                                      
+                                      simultaneously(list(melody1_orchestra,drum_envelope((sine_sound(79, 1))),   consecutively(list( silence_sound(4.2),repeat(4, chord3)  )))),
+                        
+                                      simultaneously(list(melody2_orchestra, piano(50,1),   consecutively(list( silence_sound(4.05),repeat(4, chord4),  simultaneously(list(chord5_string, violin(81,1.1)   )) )))),
+                                    
+                                      chord6789_1,
+                                    
+                                      simultaneously(list(chord5_string, pipe_organ(81,1.1))),
+                                      
+                                      chord6789,
+                                      
+                                      adsr(0.5, 0.5, 0.5, 0.5)(end)
+                                      ));
+
+    
+    }
+   
+
+//Test your sound here (keep this play function call in your submission):
+play(sounds_contest_YU_HANG());
+
+
+
+
+
+
+
+
+
+
+
